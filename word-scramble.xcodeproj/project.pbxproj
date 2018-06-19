@@ -13,6 +13,7 @@
 		9EE2744E20D88EBA00CA653B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EE2744D20D88EBA00CA653B /* Assets.xcassets */; };
 		9EE2745120D88EBA00CA653B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EE2744F20D88EBA00CA653B /* LaunchScreen.storyboard */; };
 		9EE2745C20D88EBB00CA653B /* word_scrambleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE2745B20D88EBB00CA653B /* word_scrambleTests.swift */; };
+		9EE2746720D8A0E000CA653B /* start.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9EE2746620D8A0E000CA653B /* start.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		9EE2745720D88EBB00CA653B /* word-scrambleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "word-scrambleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EE2745B20D88EBB00CA653B /* word_scrambleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = word_scrambleTests.swift; sourceTree = "<group>"; };
 		9EE2745D20D88EBB00CA653B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9EE2746620D8A0E000CA653B /* start.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 		9EE2743A20D88EB900CA653B = {
 			isa = PBXGroup;
 			children = (
+				9EE2746820D8A10900CA653B /* etc */,
 				9EE2744520D88EB900CA653B /* word-scramble */,
 				9EE2745A20D88EBB00CA653B /* word-scrambleTests */,
 				9EE2744420D88EB900CA653B /* Products */,
@@ -94,6 +97,14 @@
 				9EE2745D20D88EBB00CA653B /* Info.plist */,
 			);
 			path = "word-scrambleTests";
+			sourceTree = "<group>";
+		};
+		9EE2746820D8A10900CA653B /* etc */ = {
+			isa = PBXGroup;
+			children = (
+				9EE2746620D8A0E000CA653B /* start.txt */,
+			);
+			path = etc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EE2745120D88EBA00CA653B /* LaunchScreen.storyboard in Resources */,
+				9EE2746720D8A0E000CA653B /* start.txt in Resources */,
 				9EE2744E20D88EBA00CA653B /* Assets.xcassets in Resources */,
 				9EE2744C20D88EB900CA653B /* Main.storyboard in Resources */,
 			);

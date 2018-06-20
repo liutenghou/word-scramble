@@ -55,9 +55,40 @@ class ViewController: UITableViewController {
     //click submit button from alert
     func submit(answer: String){
         print(answer)
+        
+        let lowerAnswer = answer.lowercased()
+        
+        //check if word can be made from given letters
+        
+        //check if word is valid
+        
+        //check if word is already used else add
+        
+        if isPossible(word: lowerAnswer) && isOriginal(word: lowerAnswer) && isReal(word: lowerAnswer){
+            //insert new row in tableview
+            usedWords.insert(lowerAnswer, at: 0)
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.insertRows(at: [indexPath], with: .automatic)
+        }
     }
     
-    //reshuffles array, resets
+    //MARK: word check methods
+    func isPossible(word: String) -> Bool {
+        print("isPossible \(word)")
+        return true
+    }
+    
+    func isOriginal(word: String) -> Bool {
+        print("isOriginal \(word)")
+        return true
+    }
+    
+    func isReal(word: String) -> Bool {
+        print("isReal \(word)")
+        return true
+    }
+    
+    //MAR: start. reshuffles array, resets
     func startGame(){
         //reshuffle array
         allWords = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: allWords) as! [String]

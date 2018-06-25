@@ -19,6 +19,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         //set the right nav bar button
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
         
@@ -30,7 +31,6 @@ class ViewController: UITableViewController {
         }else{
             allWords = ["silkworm"]
         }
-        
         startGame()
     }
     
@@ -44,8 +44,8 @@ class ViewController: UITableViewController {
 
         let submitAction = UIAlertAction(title: "Submit", style: .default){
             [unowned self, ac] (action:UIAlertAction) in
-                let answer = ac.textFields![0]
-                self.submit(answer: answer.text!)
+                let answer = ac.textFields![0].text!.lowercased()
+                self.submit(answer: answer)
         }
         
         ac.addAction(submitAction)
@@ -55,44 +55,67 @@ class ViewController: UITableViewController {
     //click submit button from alert
     func submit(answer: String){
         print(answer)
-        
-        let lowerAnswer = answer.lowercased()
-        
-        //check if word can be made from given letters
-        
-        //check if word is valid
-        
-        //check if word is already used else add
-        
-        if isPossible(word: lowerAnswer) && isOriginal(word: lowerAnswer) && isReal(word: lowerAnswer){
+        //checks
+        if isPossible(word: answer) && !isAlreadyUsed(word: answer) && isReal(word: answer){
             //insert new row in tableview
-            usedWords.insert(lowerAnswer, at: 0)
+            usedWords.insert(answer, at: 0)
             let indexPath = IndexPath(row: 0, section: 0)
             tableView.insertRows(at: [indexPath], with: .automatic)
+        }else{
+            let errorTitle:String = "Oops,"
+            let errorMessage:String = "Can't use that word."
+            let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(ac, animated: true)
         }
     }
     
     //MARK: word check methods
     func isPossible(word: String) -> Bool {
         print("isPossible \(word)")
+        
+        var tempSelectedWord = selectedWord
+        //loop through tempWord, remove letters that are found in tempSelectedWord
+        for letter in word{
+            if let letterIndex = tempSelectedWord.index(of:letter){
+                tempSelectedWord.remove(at: letterIndex)
+            }else{
+                return false
+            }
+        }
         return true
     }
     
-    func isOriginal(word: String) -> Bool {
+    func isAlreadyUsed(word: String) -> Bool {
         print("isOriginal \(word)")
-        return true
+        
+        if word == selectedWord {
+            return true
+        }
+        
+        return usedWords.contains(word)
     }
     
     func isReal(word: String) -> Bool {
         print("isReal \(word)")
-        return true
+        
+        if word.count < 2{
+            return false
+        }
+        
+        //TODO: use lexicontext or some other static library instead
+        let wordChecker = UITextChecker() //use spellcheck
+        let wordRange = NSMakeRange(0, word.utf16.count)
+        let misspelledRange:NSRange = wordChecker.rangeOfMisspelledWord(in: word, range: wordRange, startingAt: 0, wrap: false, language: "en")
+        
+        return misspelledRange.location == NSNotFound //no mispellings found -> returns true
     }
     
     //MAR: start. reshuffles array, resets
     func startGame(){
         //reshuffle array
         allWords = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: allWords) as! [String]
-        selectedWord = allWords[0]
+        selectedWord = allWords[0].lowercased()
         title = selectedWord
         usedWords.removeAll(keepingCapacity: true)
         tableView.reloadData()
